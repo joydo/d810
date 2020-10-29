@@ -1,0 +1,926 @@
+{
+  "description": "Unflattening O-LLVM with control flow flattening",
+  "ins_rules": [
+    {
+      "name": "AddXor_Rule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "AddXor_Rule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Add_HackersDelightRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Add_HackersDelightRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Add_HackersDelightRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Add_HackersDelightRule_4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Add_HackersDelightRule_5",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Add_OllvmRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Add_OllvmRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Add_OllvmRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Add_OllvmRule_4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Add_SpecialConstantRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Add_SpecialConstantRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Add_SpecialConstantRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "And1_MbaRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "AndBnot_FactorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "AndBnot_FactorRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "AndBnot_FactorRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "AndBnot_FactorRule_4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "AndBnot_HackersDelightRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "AndBnot_HackersDelightRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "AndGetUpperBits_FactorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "AndOr_FactorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "AndXor_FactorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "And_FactorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "And_FactorRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "And_HackersDelightRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "And_HackersDelightRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "And_HackersDelightRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "And_HackersDelightRule_4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "And_OllvmRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "And_OllvmRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "And_OllvmRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "BnotAdd_MbaRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "BnotAnd_FactorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "BnotAnd_FactorRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "BnotAnd_FactorRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "BnotAnd_FactorRule_4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "BnotOr_FactorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "BnotXor_FactorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "BnotXor_Rule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "BnotXor_Rule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "BnotXor_Rule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Bnot_FactorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Bnot_FactorRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Bnot_FactorRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Bnot_FactorRule_4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Bnot_HackersDelightRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Bnot_HackersDelightRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Bnot_MbaRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Bnot_Rule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Bnot_XorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule10",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule11",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule12",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule13",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule14",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule15",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule16",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule17",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule18",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule19",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule20",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule21",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule22",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule5",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule6",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule7",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule8",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "CstSimplificationRule9",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "GetIdentRule1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "GetIdentRule2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "GetIdentRule3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Mul_FactorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Mul_FactorRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Mul_MbaRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Mul_MbaRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Mul_MbaRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Mul_MbaRule_4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "NegAdd_HackersDelightRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "NegAdd_HackersDelightRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "NegOr_HackersDelightRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "NegXor_HackersDelightRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "NegXor_HackersDelightRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Neg_HackersDelightRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Neg_HackersDelightRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "OrBnot_FactorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "OrBnot_FactorRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "OrBnot_FactorRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "OrBnot_FactorRule_4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Or_FactorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Or_FactorRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Or_FactorRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Or_HackersDelightRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Or_HackersDelightRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Or_HackersDelightRule_2_variant_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Or_MbaRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Or_MbaRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Or_MbaRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Or_OllvmRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Or_Rule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Or_Rule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Or_Rule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Or_Rule_4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Pred0Rule1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Pred0Rule2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Pred0Rule3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Pred0Rule4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Pred0Rule5",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredFFRule1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredFFRule2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredFFRule3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredFFRule4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredOdd1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredOdd2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredOr1_Rule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredOr2_Rule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredSetbRule1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredSetnzRule1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredSetnzRule2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredSetnzRule3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredSetnzRule4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredSetnzRule5",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredSetnzRule6",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredSetnzRule8",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredSetzRule1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredSetzRule2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "PredSetzRule3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Sub1Add_HackersDelightRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Sub1And1_MbaRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Sub1And_HackersDelightRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Sub1Or_MbaRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Sub1_FactorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Sub1_FactorRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Sub_HackersDelightRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Sub_HackersDelightRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Sub_HackersDelightRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Sub_HackersDelightRule_4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "WeirdRule1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "WeirdRule2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "WeirdRule3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "WeirdRule4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "WeirdRule5",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "WeirdRule6",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor1_MbaRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "XorAlmost_Rule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_FactorRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_FactorRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_FactorRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_HackersDelightRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_HackersDelightRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_HackersDelightRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_HackersDelightRule_4",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_HackersDelightRule_5",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_MbaRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_MbaRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_MbaRule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_NestedStuff",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_Rule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_Rule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_Rule_3",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_SpecialConstantRule_1",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Xor_SpecialConstantRule_2",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "AndChain",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "ArithmeticChain",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "OrChain",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "XorChain",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Z3ConstantOptimization",
+      "is_activated": true,
+      "config": {
+        "min_nb_opcode": 4,
+        "min_nb_constant": 3
+      }
+    },
+    {
+      "name": "Z3SmodRuleGeneric",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Z3lnotRuleGeneric",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Z3setnzRuleGeneric",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "Z3setzRuleGeneric",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "ExampleGuessingRule",
+      "is_activated": true,
+      "config": {
+        "min_nb_var": 1,
+        "max_nb_var": 3,
+        "min_nb_diff_opcodes": 3,
+        "max_nb_diff_opcodes": 6
+      }
+    }
+  ],
+  "blk_rules": [
+    {
+      "name": "Unflattener",
+      "is_activated": true,
+      "config": {}
+    },
+    {
+      "name": "JumpFixer",
+      "is_activated": true,
+      "config": {
+        "enabled_rules": [
+          "CompareConstantRule1",
+          "CompareConstantRule2",
+          "CompareConstantRule3",
+          "JaeRule1",
+          "JbRule1",
+          "JnzRule1",
+          "JnzRule2",
+          "JnzRule3",
+          "JnzRule4",
+          "JnzRule5",
+          "JnzRule6",
+          "JnzRule7",
+          "JnzRule8"
+        ]
+      }
+    }
+  ]
+}
