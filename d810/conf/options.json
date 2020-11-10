@@ -7,8 +7,7 @@
     "default_instruction_only.json",
     "default_unflattening_ollvm.json",
     "default_unflattening_switch_case.json",
-    "example_anel.json",
-    "example_unflattening_indirect.json"
+    "example_anel.json"
   ],
   "last_project_index": 0
 }
