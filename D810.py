@@ -9,6 +9,8 @@ from d810.manager import D810State, D810_LOG_DIR_NAME
 from d810.log import configure_loggers, clear_logs
 
 
+D810_VERSION = "0.1"
+
 class D810Plugin(idaapi.plugin_t):
     # variables required by IDA
     flags = 0  # normal plugin
@@ -55,7 +57,7 @@ class D810Plugin(idaapi.plugin_t):
         if (int(kv[0]) < 7) or (int(kv[1]) < 5):
             print("D-810 need IDA version >= 7.5. Skipping")
             return idaapi.PLUGIN_SKIP
-
+        print("D-810 initialized (version {0})".format(D810_VERSION))
         return idaapi.PLUGIN_OK
 
 
