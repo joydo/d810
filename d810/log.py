@@ -3,7 +3,7 @@ import shutil
 import logging
 import logging.config
 
-LOG_CONFIG_FILENAME = "log.ini"""
+LOG_CONFIG_FILENAME = "log.ini"
 LOG_FILENAME = "d810.log"
 Z3_TEST_FILENAME = "z3_check_instructions_substitution.py"
 
