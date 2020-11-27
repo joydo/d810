@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import json
 import logging
 import idaapi
@@ -67,7 +68,7 @@ class PluginConfigurationFileForm_t(QtWidgets.QDialog):
 
     def choose_log_dir(self):
         logger.debug("Calling save_rule_configuration")
-        log_dir = QtWidgets.QFileDialog.getExistingDirectory(self, "Open Directory", "/home",
+        log_dir = QtWidgets.QFileDialog.getExistingDirectory(self, "Open Directory", os.path.expanduser("~"),
                                                                   QtWidgets.QFileDialog.ShowDirsOnly |
                                                                   QtWidgets.QFileDialog.DontResolveSymlinks)
         if log_dir != "":
