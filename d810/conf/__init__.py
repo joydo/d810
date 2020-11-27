@@ -4,7 +4,7 @@ import json
 
 class D810Configuration(object):
     def __init__(self):
-        self.config_dir = os.path.join(os.getenv("HOME"), ".idapro", "plugins", "d810", "conf")
+        self.config_dir = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
         self.config_file = os.path.join(self.config_dir, "options.json")
         with open(self.config_file, "r") as fp:
             self._options = json.load(fp)
