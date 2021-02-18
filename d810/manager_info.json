@@ -47,6 +47,7 @@
     "d810.optimizers.flow.flattening.unflattener_fake_jump",
     "d810.optimizers.flow.flattening.unflattener_switch_case",
     "d810.optimizers.flow.flattening.unflattener_indirect",
+    "d810.optimizers.flow.flattening.fix_pred_cond_jump_block",
     "d810.optimizers.flow.flattening",
     "d810.optimizers.flow",
     "d810.hexrays_helpers",

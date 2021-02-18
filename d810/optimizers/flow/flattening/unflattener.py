@@ -29,6 +29,7 @@ class OllvmDispatcherInfo(GenericDispatcherInfo):
         self.comparison_values.append(num_mop.nnn.value)
         self._explore_children(self.entry_block)
         dispatcher_blk_with_external_father = self._get_dispatcher_blocks_with_external_father()
+        # TODO: I think this can be wrong because we are too permissive in detection of dispatcher blocks
         if len(dispatcher_blk_with_external_father) != 0:
             return False
         return True
