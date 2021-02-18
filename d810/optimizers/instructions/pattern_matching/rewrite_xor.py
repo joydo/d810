@@ -2,7 +2,7 @@ from ida_hexrays import *
 
 from d810.optimizers.instructions.pattern_matching.handler import PatternMatchingRule
 from d810.ast import AstLeaf, AstConstant, AstNode
-from d810.hexrays_helpers import equal_bnot_mop, SUB_TABLE
+from d810.hexrays_helpers import equal_bnot_mop, equal_bnot_cst, SUB_TABLE
 
 
 class Xor_HackersDelightRule_1(PatternMatchingRule):
@@ -268,6 +268,48 @@ class Xor_Rule_3(PatternMatchingRule):
                                       AstLeaf('x_1'),
                                       AstLeaf('bnot_x2'))))
     REPLACEMENT_PATTERN = AstNode(m_xor, AstNode(m_bnot, AstLeaf('x_0')), AstLeaf('x_1'))
+
+
+class Xor_Rule_4(PatternMatchingRule):
+    PATTERN = AstNode(m_or,
+                      AstNode(m_and,
+                              AstLeaf("x_0"),
+                              AstLeaf("bnot_x_1")),
+                      AstNode(m_and,
+                              AstLeaf("bnot_x_0"),
+                              AstLeaf("x_1")))
+
+    REPLACEMENT_PATTERN = AstNode(m_xor,
+                                  AstLeaf('x_0'),
+                                  AstLeaf("x_1"))
+
+    def check_candidate(self, candidate):
+        if not equal_bnot_mop(candidate["x_0"].mop, candidate["bnot_x_0"].mop):
+            return False
+        if not equal_bnot_mop(candidate["x_1"].mop, candidate["bnot_x_1"].mop):
+            return False
+        return True
+
+
+class Xor_Rule_4_WithXdu(PatternMatchingRule):
+    PATTERN = AstNode(m_or,
+                      AstNode(m_and,
+                              AstLeaf("x_0"),
+                              AstConstant("bnot_c_1")),
+                      AstNode(m_and,
+                              AstNode(m_bnot, AstLeaf("x_0")),
+                              AstConstant("c_1")))
+
+    REPLACEMENT_PATTERN = AstNode(m_xor,
+                                  AstLeaf("x_0"),
+                                  AstLeaf("c_1"))
+
+    def check_candidate(self, candidate):
+        if candidate["x_0"].mop.t != mop_d:
+            return False
+        if candidate["x_0"].mop.d.opcode != m_xdu:
+            return False
+        return equal_bnot_cst(candidate["c_1"].mop, candidate["bnot_c_1"].mop, mop_size=candidate["x_0"].mop.d.l.size)
 
 
 class XorAlmost_Rule_1(PatternMatchingRule):
