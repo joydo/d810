@@ -135,12 +135,14 @@ MSB_TABLE = {1: 0x80, 2: 0x8000, 4: 0x80000000, 8: 0x8000000000000000}
 
 
 # Hex-Rays mop equality checking
-def equal_bnot_cst(lo: mop_t, ro: mop_t) -> bool:
+def equal_bnot_cst(lo: mop_t, ro: mop_t, mop_size=None) -> bool:
     if (lo.t != mop_n) or (ro.t != mop_n):
         return False
     if lo.size != ro.size:
         return False
-    return lo.nnn.value ^ ro.nnn.value == AND_TABLE[lo.size]
+    if mop_size is None:
+        mop_size = lo.size
+    return lo.nnn.value ^ ro.nnn.value == AND_TABLE[mop_size]
 
 
 def equal_bnot_mop(lo: mop_t, ro: mop_t, test_two_sides=True) -> bool:
