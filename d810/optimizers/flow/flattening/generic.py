@@ -460,9 +460,9 @@ class GenericDispatcherUnflatteningRule(GenericUnflatteningRule):
             self.last_pass_nb_patch_done = self.remove_flattening()
         unflat_logger.info("Unflattening at maturity {0} path {1}: {2} changes"
                            .format(self.cur_maturity, self.cur_maturity_pass, self.last_pass_nb_patch_done))
-        mba_deep_cleaning(self.mba)
+        nb_clean = mba_deep_cleaning(self.mba)
         dump_microcode_for_debug(self.mba, self.log_dir, "unflat_{0}_after_cleaning".format(self.cur_maturity_pass))
-        if self.last_pass_nb_patch_done > 0:
+        if self.last_pass_nb_patch_done + nb_clean > 0:
             self.mba.mark_chains_dirty()
             self.mba.optimize_local(0)
             self.mba.verify(True)
