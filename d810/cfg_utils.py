@@ -443,12 +443,8 @@ def mba_deep_cleaning(mba: mbl_array_t) -> int:
         # Doing this optimization before MMAT_CALLS may create blocks with call instruction (not last instruction)
         # IDA does like that and will raise a 50864 error
         return 0
-    mba.remove_empty_blocks()
     mba.combine_blocks()
     nb_change = mba_remove_simple_goto_blocks(mba)
-    if nb_change > 0:
-        mba.remove_empty_blocks()
-        mba.combine_blocks()
     return nb_change
 
 
