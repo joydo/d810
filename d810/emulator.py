@@ -357,6 +357,12 @@ class MicroCodeInterpreter(object):
                 raise e
             else:
                 return None
+        except Exception as e:
+            emulator_log.error("Unexpected exception while computing constant mop value: '{0}': {1}".format(format_mop_t(mop), e))
+            if raise_exception:
+                raise e
+            else:
+                return None
 
 
 class MopMapping(object):
