@@ -19,6 +19,7 @@
     "d810.optimizers.instructions.pattern_matching.rewrite_sub",
     "d810.optimizers.instructions.pattern_matching.rewrite_xor",
     "d810.optimizers.instructions.pattern_matching.weird",
+    "d810.optimizers.instructions.pattern_matching.experimental",
     "d810.optimizers.instructions.pattern_matching",
     "d810.optimizers.instructions.chain.handler",
     "d810.optimizers.instructions.chain.chain_rules",
