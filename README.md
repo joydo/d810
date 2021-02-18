@@ -17,7 +17,7 @@ It was designed with the following goals in mind:
 
 # Installation
 
-**Only IDA v7.5 or later is supported** (since we need the microcode Python API) 
+**Only IDA v7.5 or later is supported with Python 3.7 and higher** (since we need the microcode Python API) 
 
 Copy this repository in `.idapro/plugins`
 
