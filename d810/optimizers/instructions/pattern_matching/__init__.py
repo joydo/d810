@@ -12,6 +12,7 @@ from d810.optimizers.instructions.pattern_matching.rewrite_or import *
 from d810.optimizers.instructions.pattern_matching.rewrite_sub import *
 from d810.optimizers.instructions.pattern_matching.rewrite_xor import *
 from d810.optimizers.instructions.pattern_matching.weird import *
+from d810.optimizers.instructions.pattern_matching.experimental import *
 
 PATTERN_MATCHING_RULES = [x() for x in get_all_subclasses(PatternMatchingRule)]
 
