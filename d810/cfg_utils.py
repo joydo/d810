@@ -262,6 +262,7 @@ def create_block(blk: mblock_t, blk_ins: List[minsn_t], is_0_way: bool = False) 
     new_blk = insert_nop_blk(blk)
     for ins in blk_ins:
         tmp_ins = minsn_t(ins)
+        tmp_ins.setaddr(new_blk.tail.ea)
         new_blk.insert_into_block(tmp_ins, new_blk.tail)
 
     if is_0_way:
@@ -438,12 +439,19 @@ def mba_remove_simple_goto_blocks(mba: mbl_array_t) -> int:
     return nb_change
 
 
-def mba_deep_cleaning(mba: mbl_array_t) -> int:
+def mba_deep_cleaning(mba: mbl_array_t, call_mba_combine_block=True) -> int:
     if mba.maturity < MMAT_CALLS:
         # Doing this optimization before MMAT_CALLS may create blocks with call instruction (not last instruction)
         # IDA does like that and will raise a 50864 error
         return 0
-    mba.combine_blocks()
+    if call_mba_combine_block:
+        # Ideally we want IDA to simplify the graph for us with combine_blocks
+        # However, We observe several crashes when this option is activated
+        # (especially when it is used during  O-LLVM unflattening)
+        # TODO: investigate the root cause of this issue
+        mba.combine_blocks()
+    else:
+        mba.remove_empty_blocks()
     nb_change = mba_remove_simple_goto_blocks(mba)
     return nb_change
 
