@@ -63,11 +63,18 @@ class SetGlobalVariablesToZeroIfDetectedReadOnly(EarlyRule):
         return True
 
     def check_candidate(self, candidate):
-        if candidate["ro_dword"].mop.t != mop_v:
-            return False
-        mem_read_address = candidate["ro_dword"].mop.g
-        if not self.is_read_only_inited_var(mem_read_address):
+        mem_read_address = None
+        if candidate["ro_dword"].mop.t == mop_v:
+            mem_read_address = candidate["ro_dword"].mop.g
+        elif candidate["ro_dword"].mop.t == mop_a:
+            if candidate["ro_dword"].mop.a.t == mop_v:
+                mem_read_address = candidate["ro_dword"].mop.a.g
+
+        if mem_read_address is None:
             return False
 
+        if not self.is_read_only_inited_var(mem_read_address):
+            return False
         candidate.add_constant_leaf("val_res", 0, candidate["ro_dword"].mop.size)
         return True
+
