@@ -300,6 +300,7 @@ class GenericDispatcherUnflatteningRule(GenericUnflatteningRule):
         self.dispatcher_list = []
         self.max_duplication_passes = self.DEFAULT_MAX_DUPLICATION_PASSES
         self.max_passes = self.DEFAULT_MAX_PASSES
+        self.non_significant_changes = 0
 
     def check_if_rule_should_be_used(self, blk: mblock_t) -> bool:
         if not super().check_if_rule_should_be_used(blk):
@@ -327,10 +328,18 @@ class GenericDispatcherUnflatteningRule(GenericUnflatteningRule):
     def ensure_all_dispatcher_fathers_are_direct(self) -> int:
         nb_change = 0
         for dispatcher_info in self.dispatcher_list:
+            nb_change += self.ensure_dispatcher_fathers_are_direct(dispatcher_info)
             dispatcher_father_list = [self.mba.get_mblock(x) for x in dispatcher_info.entry_block.blk.predset]
             for dispatcher_father in dispatcher_father_list:
                 nb_change += ensure_child_has_an_unconditional_father(dispatcher_father,
                                                                       dispatcher_info.entry_block.blk)
+        return nb_change
+
+    def ensure_dispatcher_fathers_are_direct(self, dispatcher_info: GenericDispatcherInfo) -> int:
+        nb_change = 0
+        dispatcher_father_list = [self.mba.get_mblock(x) for x in dispatcher_info.entry_block.blk.predset]
+        for dispatcher_father in dispatcher_father_list:
+            nb_change += ensure_child_has_an_unconditional_father(dispatcher_father, dispatcher_info.entry_block.blk)
         return nb_change
 
     def register_initialization_variables(self, mop_tracker):
@@ -358,6 +367,11 @@ class GenericDispatcherUnflatteningRule(GenericUnflatteningRule):
             raise NotDuplicableFatherException("Dispatcher {0} predecessor {1} is not duplicable: {2}"
                                                .format(dispatcher_entry_block.serial, dispatcher_father.serial,
                                                        father_histories_cst))
+        for father_history_cst in father_histories_cst:
+            if None in father_history_cst:
+                raise NotDuplicableFatherException("Dispatcher {0} predecessor {1} has None value: {2}"
+                                                   .format(dispatcher_entry_block.serial, dispatcher_father.serial,
+                                                           father_histories_cst))
 
         unflat_logger.info("Dispatcher {0} predecessor {1} is resolvable: {2}"
                            .format(dispatcher_entry_block.serial, dispatcher_father.serial, father_histories_cst))
@@ -407,9 +421,9 @@ class GenericDispatcherUnflatteningRule(GenericUnflatteningRule):
                                            .format(dispatcher_father.serial, mop_searched_values_list))
 
     def remove_flattening(self) -> int:
-        total_nb_change = ensure_last_block_is_goto(self.mba)
-        total_nb_change += self.ensure_all_dispatcher_fathers_are_direct()
-        nb_flattened_branches = 0
+        total_nb_change = 0
+        self.non_significant_changes = ensure_last_block_is_goto(self.mba)
+        self.non_significant_changes += self.ensure_all_dispatcher_fathers_are_direct()
         for dispatcher_info in self.dispatcher_list:
             dump_microcode_for_debug(self.mba, self.log_dir, "unflat_{0}_dispatcher_{1}_before_duplication"
                                      .format(self.cur_maturity_pass, dispatcher_info.entry_block.serial))
@@ -447,7 +461,7 @@ class GenericDispatcherUnflatteningRule(GenericUnflatteningRule):
         if not self.check_if_rule_should_be_used(blk):
             return 0
         self.last_pass_nb_patch_done = 0
-        unflat_logger.info("Unflattening at maturity {0} path {1}".format(self.cur_maturity, self.cur_maturity_pass))
+        unflat_logger.info("Unflattening at maturity {0} pass {1}".format(self.cur_maturity, self.cur_maturity_pass))
         dump_microcode_for_debug(self.mba, self.log_dir, "unflat_{0}_start".format(self.cur_maturity_pass))
         self.retrieve_all_dispatchers()
         if len(self.dispatcher_list) == 0:
@@ -458,12 +472,12 @@ class GenericDispatcherUnflatteningRule(GenericUnflatteningRule):
             for dispatcher_info in self.dispatcher_list:
                 dispatcher_info.print_info()
             self.last_pass_nb_patch_done = self.remove_flattening()
-        unflat_logger.info("Unflattening at maturity {0} path {1}: {2} changes"
+        unflat_logger.info("Unflattening at maturity {0} pass {1}: {2} changes"
                            .format(self.cur_maturity, self.cur_maturity_pass, self.last_pass_nb_patch_done))
-        nb_clean = mba_deep_cleaning(self.mba)
+        nb_clean = mba_deep_cleaning(self.mba, False)
         dump_microcode_for_debug(self.mba, self.log_dir, "unflat_{0}_after_cleaning".format(self.cur_maturity_pass))
-        if self.last_pass_nb_patch_done + nb_clean > 0:
+        if self.last_pass_nb_patch_done + nb_clean + self.non_significant_changes > 0:
             self.mba.mark_chains_dirty()
             self.mba.optimize_local(0)
-            self.mba.verify(True)
+        self.mba.verify(True)
         return self.last_pass_nb_patch_done
