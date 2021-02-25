@@ -3,6 +3,7 @@ import os
 from d810.ast import minsn_to_ast
 from d810.hexrays_formatters import format_minsn_t, format_mop_t, maturity_to_string
 
+from d810.optimizers.handler import DEFAULT_INSTRUCTION_MATURITIES
 from d810.optimizers.instructions.analysis.handler import InstructionAnalysisRule
 from d810.optimizers.instructions.analysis.utils import get_possible_patterns
 
@@ -12,6 +13,7 @@ class ExampleGuessingRule(InstructionAnalysisRule):
 
     def __init__(self):
         super().__init__()
+        self.maturities = DEFAULT_INSTRUCTION_MATURITIES
         self.cur_maturity = None
         self.min_nb_var = 1
         self.max_nb_var = 3

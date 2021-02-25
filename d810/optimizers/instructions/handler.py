@@ -3,7 +3,7 @@ import logging
 from typing import List
 from ida_hexrays import *
 
-from d810.optimizers.handler import OptimizationRule, DEFAULT_INSTRUCTION_MATURITIES
+from d810.optimizers.handler import OptimizationRule
 from d810.hexrays_formatters import format_minsn_t
 from d810.ast import minsn_to_ast, AstNode
 from d810.errors import D810Exception
@@ -16,7 +16,7 @@ optimizer_logger = logging.getLogger('D810.optimizer')
 class InstructionOptimizationRule(OptimizationRule):
     def __init__(self):
         super().__init__()
-        self.maturities = DEFAULT_INSTRUCTION_MATURITIES
+        self.maturities = []
 
     def check_and_replace(self, blk, ins):
         return None
@@ -97,6 +97,8 @@ class InstructionOptimizer(object):
         if not is_valid_rule_class:
             return False
         optimizer_logger.debug("Adding rule {0}".format(rule))
+        if len(rule.maturities) == 0:
+            rule.maturities = self.maturities
         self.rules.add(rule)
         self.rules_usage_info[rule.name] = 0
         return True
@@ -114,9 +116,11 @@ class InstructionOptimizer(object):
     def get_optimized_instruction(self, blk: mblock_t, ins: minsn_t):
         if blk is not None:
             self.cur_maturity = blk.mba.maturity
-        if self.cur_maturity not in self.maturities:
-            return None
+        # if self.cur_maturity not in self.maturities:
+        #     return None
         for rule in self.rules:
+            if self.cur_maturity not in rule.maturities:
+                continue
             try:
                 new_ins = rule.check_and_replace(blk, ins)
                 if new_ins is not None:
